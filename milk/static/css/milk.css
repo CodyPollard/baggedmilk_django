@@ -1,0 +1,52 @@
+// Fonts
+@font-face {
+  font-family: 'raleway';
+  src: url('/static/fonts/raleway.ttf');
+}
+// Image Size Limit
+img {
+	max-width: 300px;
+}
+// Footer Style
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+// Search options style
+input {
+	width: 100%;
+}
+
+select {
+	width: 100%;
+}
+
+body {
+  font-family: 'raleway';
+}
+
+h1, h2, h3, h4 {
+	color: #3D5E92;
+	font-weight: bold;
+}
+
+.navbar {
+	background: #3D5E92;
+}
+
+.navbar .navbar-nav > li > a {
+	color: #ffffff;
+}
+
+.navbar .navbar-header > a {
+	color: white;
+	font-weight: bold;
+}

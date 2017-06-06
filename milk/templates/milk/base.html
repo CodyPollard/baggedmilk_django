@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Bagged Milk</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/milk.css' %}">
+  </head>
+
+  <body>
+  <!-- Site wide nav -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Bagged Milk</a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/"><strong>Home</a></strong></li>
+            <li><a href="/imp"><strong>IMP?</a></strong></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    <!-- Footer -->
+    <footer class="footer">
+    <hr>
+      <div class="container text-center">
+        <p class="text-muted">Copyright &copy; <%= Time.current.year %> Baggedmilk.me<br>
+        <a href="mailto:codypollardeve@gmail.com">codypollardeve@gmail.com</a></p>
+      </div>
+    </footer>
+
+  </body>
+</html>
