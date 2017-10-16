@@ -1,8 +1,4 @@
 // Fonts
-@font-face {
-  font-family: 'raleway';
-  src: url('/static/fonts/raleway.ttf');
-}
 // Image Size Limit
 img {
 	max-width: 300px;
@@ -30,7 +26,7 @@ select {
 }
 
 body {
-  font-family: 'raleway';
+  font-family: 'Raleway', sans-serif;
 }
 
 h1, h2, h3, h4 {

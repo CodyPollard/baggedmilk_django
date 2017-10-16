@@ -1,0 +1,31 @@
+{% extends 'milk/base.html' %}
+
+{% block content %}
+<!-- Top Section -->
+<div class="container">
+	<div class="row">
+	  <div class="col-md-8">
+		  <h1>Milk-bot</h1>
+		  <p>Milk-bot is a project I started to play with the discord.py API and add some flavor to our group's Discord server. Current features include:</p>
+		  <ul>
+		  	<li>Quotes command to display a random quote from the list or a random quote from a given author. This includes the ability to add quotes directly from the discord server.</li>
+		  	<li>Magic 8ball for all those times you don't have a coin to flip on hand.</li>
+		  	<li>Shopping list command to add/remove and display a list of items.</li>
+		  	<li>CoC game currently in the works but unfinished and not in a playable state.</li>
+		  	<li>Various small house cleaning and administrative commands.</li>
+		  </ul>
+		  <p>For more information on how to add milk-bot to your server or any questions related to the various features feel free to <a href="https://discord.gg/sgs2neA">join our Discord</a>.</p>
+</div>
+
+	  <div class="col-md-4">
+	  	<h2>Contact</h2>
+            <address>
+                <strong>Bagged Milk</strong><br>
+                <a href="mailto:codypollardeve@gmail.com">Email</a><br>
+                <a href="https://github.com/CodyPollard">GitHub</a><br>
+				<a href="https://discord.gg/sgs2neA">Join our Discord</a><br>
+            </address>
+	  </div>
+	</div>
+</div>
+{% endblock %}

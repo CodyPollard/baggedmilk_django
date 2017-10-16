@@ -5,3 +5,6 @@ from django.template import loader
 # Create your views here.
 def index(request):
     return render(request, 'milk/index.html')
+
+def milkbot(request):
+    return render(request, 'milk/milkbot.html')
