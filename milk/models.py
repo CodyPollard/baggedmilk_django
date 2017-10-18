@@ -15,4 +15,4 @@ class Timer(models.Model):
     timer_ends_at = models.DateTimeField(default=datetime.now()+timedelta(hours=4))
 
     def __str__(self):
-        return self.timer_ends_at
+        return str(self.timer_ends_at)
