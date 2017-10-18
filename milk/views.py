@@ -1,9 +1,8 @@
 from datetime import timedelta, datetime
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.template import loader
 from .forms import TimerForm
 from .models import Timer
+from baggedmilk_django.secret import TIMERBOARD_KEY
 import re
 
 # Create your views here.

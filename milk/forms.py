@@ -1,10 +1,11 @@
 from django import forms
-from django.forms import Select, TextInput
-
 from .models import Timer
+from baggedmilk_django.secret import TIMERBOARD_KEY
 
 
 class TimerForm(forms.ModelForm):
+    timer_key = forms.CharField(max_length=20)
+
     class Meta:
         model = Timer
         fields = ('type', 'system', 'end_at')
@@ -23,3 +24,12 @@ class TimerForm(forms.ModelForm):
         if 'm' not in end_at:
             raise forms.ValidationError('Please add a minute to your timer. Ex: 1d12h0m')
         return end_at
+
+    def clean_timer_key(self):
+        timer_key = self.cleaned_data.get('timer_key')
+        print(timer_key)
+        print(TIMERBOARD_KEY)
+        if timer_key != TIMERBOARD_KEY:
+            raise forms.ValidationError('Please enter the correct key.')
+
+        return timer_key
