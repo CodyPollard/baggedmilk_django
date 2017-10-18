@@ -1,0 +1,48 @@
+{% extends 'milk/base.html' %}
+
+{% block content %}
+<!-- Top Section -->
+<div class="container">
+	<div class="row">
+	  <div class="col-md-8">
+		  <h1>timerboard</h1>
+          <form method="POST" action="/timerboard/" class="form-group">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {{ form.errors }}
+              <input type="submit">
+          </form>
+          <hr>
+          <h2>Current Timers</h2>
+          <table class="table">
+              <tr>
+                  <th>System</th>
+                  <th>Type</th>
+                  <th>Timer</th>
+                  <th>Time Until</th>
+              </tr>
+              {% for timer in all_timers %}
+              <tr>
+                  <td>{{ timer.system }}</td>
+                  <td>{{ timer.type }}</td>
+                  <td>{{ timer.timer_ends_at }}</td>
+                  <td>{{ timer.end_at }}</td>
+              </tr>
+              {% endfor %}
+          </table>
+
+
+</div>
+
+	  <div class="col-md-4">
+	  	<h2>Contact</h2>
+            <address>
+                <strong>Bagged Milk</strong><br>
+                <a href="mailto:codypollardeve@gmail.com">Email</a><br>
+                <a href="https://github.com/CodyPollard">GitHub</a><br>
+				<a href="https://discord.gg/sgs2neA">Join our Discord</a><br>
+            </address>
+	  </div>
+	</div>
+</div>
+{% endblock %}
