@@ -44,6 +44,6 @@ def timerboard(request):
             hours = seconds // 3600
             minutes = (seconds % 3600) // 60
             seconds = seconds % 60
-            timer.end_at = '{}:{}:{}'.format(int(hours), int(minutes), int(seconds))
+            timer.end_at = '%02d:%02d:%02d' % (hours, minutes, seconds)
 
     return render(request, 'milk/timerboard.html', {'form': form, 'all_timers': all_timers})

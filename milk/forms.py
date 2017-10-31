@@ -1,19 +1,22 @@
 from django import forms
-import floppyforms
 from .models import Timer
 from baggedmilk_django.secret import TIMERBOARD_KEY
 
 
 class TimerForm(forms.ModelForm):
 
+    TYPE_CHOICES = ['EC - Sotiyo', 'EC - Azbel', 'EC - Raitaru', 'Cit - Keepstar', 'Cit - Fortizar',
+                    'Cit - Astrahus']
     timer_key = forms.CharField(max_length=20)
+    type = forms.ChoiceField(choices=((x, x) for x in TYPE_CHOICES))
 
     class Meta:
-        data_set = ['One', 'Two', 'Three', 'Four', 'Five', 'Ten']
         model = Timer
         fields = ('type', 'system', 'end_at')
         widgets = {
-            'end_at': forms.TextInput(attrs={'placeholder': 'Ex. 1d13h45m'}),
+            'system': forms.TextInput(attrs={'list': 'json-datalist'}),
+            # 'system': floppyforms.widgets.Input(datalist='json-datalist'),
+            'end_at': forms.TextInput(attrs={'placeholder': 'Ex. 1d13h45m', 'class': 'timer'}),
         }
 
     def clean_end_at(self):

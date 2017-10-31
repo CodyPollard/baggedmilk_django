@@ -8,7 +8,10 @@ class Testing(models.Model):
 
 
 class Timer(models.Model):
-    type = models.CharField(max_length=20)
+    # Types
+    TYPE_CHOICES = ['EC - Sotiyo', 'EC - Azbel', 'EC - Raitaru', 'Cit - Keepstar', 'Cit - Fortizar',
+                    'Cit - Astrahus']
+    type = models.CharField(max_length=20, choices=((x, x) for x in TYPE_CHOICES))
     system = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     end_at = models.CharField(max_length=30)

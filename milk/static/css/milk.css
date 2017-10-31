@@ -1,24 +1,41 @@
 // Image Size Limit
+
 img {
 	max-width: 300px;
 }
 // Footer Style
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-// Search options style
-input {
-	width: 100%;
+
+input[type="text"] {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
 }
+
+select {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+}​
 
 select {
 	width: 100%;
