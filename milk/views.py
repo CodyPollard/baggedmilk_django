@@ -12,6 +12,9 @@ def index(request):
 def milkbot(request):
     return render(request, 'milk/milkbot.html')
 
+def pastecomparison(request):
+    return render(request, 'milk/pastecomparison.html')
+
 def timerboard(request):
     # Create the form
     form = TimerForm(request.POST or None)

@@ -62,3 +62,27 @@ h1, h2, h3, h4 {
 	color: white;
 	font-weight: bold;
 }
+
+/* Dropdown Styles */
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+    background: #3D5E92;
+}
+
+.navbar .navbar-nav > li > a {
+    color: white;
+	font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    color: white;
+	font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
+    background: grey;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+    background: #3D5E92;
+}
