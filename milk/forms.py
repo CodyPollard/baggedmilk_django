@@ -1,6 +1,6 @@
 from django import forms
 from .models import Timer
-from baggedmilk_django.secret import TIMERBOARD_KEY
+from django_project.secret import TIMERBOARD_KEY
 
 
 class TimerForm(forms.ModelForm):

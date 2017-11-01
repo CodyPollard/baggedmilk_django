@@ -1,5 +1,5 @@
 import os
-from baggedmilk_django import secret
+from django_project import secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'baggedmilk_django.urls'
+ROOT_URLCONF = 'django_project.urls'
 
 TEMPLATES = [
     {
@@ -59,7 +59,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'baggedmilk_django.wsgi.application'
+WSGI_APPLICATION = 'django_project.wsgi.application'
 
 
 # Database

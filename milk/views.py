@@ -2,7 +2,7 @@ from datetime import timedelta, datetime
 from django.shortcuts import render
 from .forms import TimerForm
 from .models import Timer
-from baggedmilk_django.secret import TIMERBOARD_KEY
+from django_project.secret import TIMERBOARD_KEY
 import re
 
 # Create your views here.
