@@ -1,9 +1,19 @@
-// Image Size Limit
+/* Tablet Style */
+@media (max-width: 768px) {
 
+}
+
+/* Mobile Style */
+@media (max-width: 425px) {
+    .text-compare {
+        max-width: 200px;
+    }
+}
+
+/* Browser Style */
 img {
 	max-width: 300px;
 }
-// Footer Style
 
 html {
   position: relative;
@@ -15,7 +25,6 @@ body {
 }
 
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
 }
@@ -86,3 +95,8 @@ h1, h2, h3, h4 {
 .navbar-inverse .navbar-nav .open .dropdown-menu {
     background: #3D5E92;
 }
+
+/* Paste Tool Style */
+.text-compare {
+        display: flex;
+    }

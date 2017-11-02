@@ -42,8 +42,10 @@ class TimerForm(forms.ModelForm):
 class PasteComparisonForm(forms.Form):
     paste_one = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Initial scan...',
                                                              'rows': 5,
-                                                             'cols': 50}))
+                                                             'cols': 50,
+                                                             'class': 'text-compare'}))
     paste_two = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Secondary scan...',
                                                              'rows': 5,
-                                                             'cols': 50}))
+                                                             'cols': 50,
+                                                             'class': 'text-compare'}))
 
