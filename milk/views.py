@@ -1,19 +1,42 @@
 from datetime import timedelta, datetime
 from django.shortcuts import render
-from .forms import TimerForm
+from .forms import TimerForm, PasteComparisonForm
 from .models import Timer
-from django_project.secret import TIMERBOARD_KEY
 import re
+
 
 # Create your views here.
 def index(request):
     return render(request, 'milk/index.html')
 
+
 def milkbot(request):
     return render(request, 'milk/milkbot.html')
 
+
+def paste_results(request):
+    return render(request, 'milk/paste-results.html')
+
+
 def pastecomparison(request):
-    return render(request, 'milk/pastecomparison.html')
+    # Create form
+    form = PasteComparisonForm(request.POST or None)
+    # Check for valid form
+    if form.is_valid():
+        results = []
+        # Clean form data
+        paste_one = form.cleaned_data['paste_one'].splitlines()
+        paste_two = form.cleaned_data['paste_two'].splitlines()
+        # Loop through paste_one and check against all of paste_two
+        for i in paste_one:
+            for j in paste_two:
+                if i == j:
+                    results.append(i)
+        # Render a results page and pass it the list of results
+        return render(request, 'milk/paste-results.html', {'results': results})
+
+    return render(request, 'milk/pastecomparison.html', {'form': form})
+
 
 def timerboard(request):
     # Create the form

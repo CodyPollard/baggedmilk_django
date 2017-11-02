@@ -1,22 +1,17 @@
 {% extends 'milk/base.html' %}
-
+{% load staticfiles %}
 {% block content %}
 <!-- Top Section -->
 <div class="container">
 	<div class="row">
 	  <div class="col-md-8">
-		  <h1>paste comparison</h1>
+		  <h1>comparison results</h1>
           <hr>
-          <p>The paste comparison tool should be used for comparing two seperate local scans.
-          Results will show a list of names that appeared in both scans and will ignore those that
-          only showed in one of the two scans.</p>
-          <form method="POST" class="form-group">
-              {% csrf_token %}
-              {{ form.as_p }}
-              {{ form.errors }}
-              <br>
-              <input type="submit">
-          </form>
+		  <p><strong>The following characters were found in both of your scans.</strong></strong></p>
+		  {% for i in results %}
+		  <p>{{ i }}</p>
+		  {% endfor %}
+		  <br><a href="/pastecomparison/"><strong>Return to scan tool.</strong></a>
 	  </div>
 	  <div class="col-md-4">
 	  	<h2>Contact</h2>

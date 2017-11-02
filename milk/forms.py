@@ -15,7 +15,6 @@ class TimerForm(forms.ModelForm):
         fields = ('type', 'system', 'end_at')
         widgets = {
             'system': forms.TextInput(attrs={'list': 'json-datalist'}),
-            # 'system': floppyforms.widgets.Input(datalist='json-datalist'),
             'end_at': forms.TextInput(attrs={'placeholder': 'Ex. 1d13h45m', 'class': 'timer'}),
         }
 
@@ -38,3 +37,13 @@ class TimerForm(forms.ModelForm):
         if timer_key != TIMERBOARD_KEY:
             raise forms.ValidationError('Please enter the correct key.')
         return timer_key
+
+
+class PasteComparisonForm(forms.Form):
+    paste_one = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Initial scan...',
+                                                             'rows': 5,
+                                                             'cols': 50}))
+    paste_two = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Secondary scan...',
+                                                             'rows': 5,
+                                                             'cols': 50}))
+
