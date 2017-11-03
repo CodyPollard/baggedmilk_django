@@ -35,6 +35,12 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
+input[type="password"] {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 select {
     float: right;
     width: 100%;

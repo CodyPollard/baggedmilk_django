@@ -1,13 +1,13 @@
 from django import forms
-from .models import Timer
+from .models import Timer, DucksInjury
 from django_project.secret import TIMERBOARD_KEY
 
 
 class TimerForm(forms.ModelForm):
 
-    TYPE_CHOICES = ['EC - Sotiyo', 'EC - Azbel', 'EC - Raitaru', 'Cit - Keepstar', 'Cit - Fortizar',
-                    'Cit - Astrahus']
-    timer_key = forms.CharField(max_length=20)
+    TYPE_CHOICES = ['EC - Sotiyo', 'EC - Azbel', 'EC - Raitaru', 'Cit - Keepstar',
+                    'Cit - Fortizar', 'Cit - Astrahus']
+    timer_key = forms.CharField(widget=forms.PasswordInput, max_length=20)
     type = forms.ChoiceField(choices=((x, x) for x in TYPE_CHOICES))
 
     class Meta:
@@ -48,4 +48,10 @@ class PasteComparisonForm(forms.Form):
                                                              'rows': 5,
                                                              'cols': 50,
                                                              'class': 'text-compare'}))
+
+
+# class DucksInjuryForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = DucksInjury
 

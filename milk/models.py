@@ -19,3 +19,12 @@ class Timer(models.Model):
 
     def __str__(self):
         return str(self.timer_ends_at)
+
+
+class DucksInjury(models.Model):
+    # Model Fields
+    last_injury = models.DateTimeField(default=datetime.now())
+
+    # For backend
+    def __str__(self):
+        return str(self.last_injury)
