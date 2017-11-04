@@ -50,8 +50,9 @@ class PasteComparisonForm(forms.Form):
                                                              'class': 'text-compare'}))
 
 
-# class DucksInjuryForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = DucksInjury
+class InjuryUpdateForm(forms.Form):
+    news_link = forms.CharField(required=True, max_length=150)
+    description = forms.Textarea(required=False, attrs=({'placeholder': 'Any extra details to add?',
+                                                         'rows': 5,
+                                                         'cols': 50}))
 

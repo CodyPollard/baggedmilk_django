@@ -24,7 +24,9 @@ class Timer(models.Model):
 class DucksInjury(models.Model):
     # Model Fields
     last_injury = models.DateTimeField(default=datetime.now())
+    news_link = models.CharField(default='http://baggedmilk.me/wwdli', max_length=150)
+    headline = models.CharField(default=str(last_injury), max_length=150)
 
     # For backend
     def __str__(self):
-        return str(self.last_injury)
+        return self.headline

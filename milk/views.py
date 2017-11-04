@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime
 from django.shortcuts import render
-from .forms import TimerForm, PasteComparisonForm
+from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
 from .models import Timer, DucksInjury
 import re
 
@@ -16,9 +16,10 @@ def milkbot(request):
 
 def wwdli(request):
     injury_obj = DucksInjury.objects.first()
-    last_injury = injury_obj.last_injury
+    # Form
+    form = InjuryUpdateForm(request)
 
-    return render(request, 'milk/wwdli.html', {'last_injury': last_injury})
+    return render(request, 'milk/wwdli.html', {'injury_obj': injury_obj})
 
 
 def paste_results(request):
