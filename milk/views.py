@@ -1,7 +1,9 @@
 from datetime import timedelta, datetime
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
 from .models import Timer, DucksInjury
+from django.core.mail import send_mail
 import re
 
 
@@ -13,13 +15,22 @@ def index(request):
 def milkbot(request):
     return render(request, 'milk/milkbot.html')
 
+def wwdli_success(request):
+    injury_obj = DucksInjury.objects.first()
+    return render(request, 'milk/wwdli-success.html', {'injury_obj': injury_obj})
 
 def wwdli(request):
     injury_obj = DucksInjury.objects.first()
     # Form
-    form = InjuryUpdateForm(request)
+    form = InjuryUpdateForm(request.POST or None)
+    if form.is_valid():
+        news_link = form.cleaned_data['news_link']
+        description = form.cleaned_data['description']
+        email_body = 'News Link: {}\nDescription: {}'.format(news_link, description)
+        send_mail('Injury Update', email_body, 'baggedmilkme@gmail.com', ['codypollardeve@gmail.com'], fail_silently=False)
+        return redirect('wwdli-success')
 
-    return render(request, 'milk/wwdli.html', {'injury_obj': injury_obj})
+    return render(request, 'milk/wwdli.html', {'injury_obj': injury_obj, 'form': form})
 
 
 def paste_results(request):

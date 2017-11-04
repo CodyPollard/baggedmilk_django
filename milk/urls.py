@@ -8,6 +8,6 @@ urlpatterns = [
     url(r'^timerboard/$', views.timerboard, name='timerboard'),
     url(r'pastecomparison/$', views.pastecomparison, name='pastecomparison'),
     url(r'pastecomparison/results/$', views.paste_results, name='paste-results'),
-    url(r'^wwdli/$', views.wwdli, name='milkbot'),
-
+    url(r'^wwdli/$', views.wwdli, name='wwdli'),
+    url(r'^wwdli-success/$', views.wwdli_success, name='wwdli-success'),
 ]

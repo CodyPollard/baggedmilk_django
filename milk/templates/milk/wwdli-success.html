@@ -11,13 +11,7 @@
 		  <p class="Timer">...</p>
 		  <p><a href="{{ injury_obj.news_link }}"><strong>{{ injury_obj.headline }}</strong></a></p>
           <hr>
-		  <p>Have I missed an injury? Let me know what I missed and I'll do my best to update it.</p>
-		  <form method="POST">
-              {% csrf_token %}
-			  {{ form.as_p }}
-			  {{ form.errors }}
-              <input type="submit">
-          </form>
+		  <p>Thank you for your submission I will get to it as soon as I can.</p>
 	  </div>
 	  <div class="col-md-4">
 	  	<h2>Contact</h2>

@@ -51,8 +51,7 @@ class PasteComparisonForm(forms.Form):
 
 
 class InjuryUpdateForm(forms.Form):
-    news_link = forms.CharField(required=True, max_length=150)
-    description = forms.Textarea(required=False, attrs=({'placeholder': 'Any extra details to add?',
-                                                         'rows': 5,
-                                                         'cols': 50}))
+    news_link = forms.CharField(max_length=150)
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs=({'placeholder': 'Any extra details to add?',
+                                                         'class': 'text-compare'})))
 
