@@ -1,5 +1,4 @@
 from datetime import timedelta, datetime
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
 from .models import Timer, DucksInjury
@@ -15,22 +14,27 @@ def index(request):
 def milkbot(request):
     return render(request, 'milk/milkbot.html')
 
+
 def wwdli_success(request):
-    injury_obj = DucksInjury.objects.first()
-    return render(request, 'milk/wwdli-success.html', {'injury_obj': injury_obj})
+    injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+    latest_injury = injury_list[0]
+    return render(request, 'milk/wwdli-success.html', {'latest_injury': latest_injury,
+                                               'injury_list': injury_list})
+
 
 def wwdli(request):
-    injury_obj = DucksInjury.objects.first()
+    injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+    latest_injury = injury_list[0]
     # Form
     form = InjuryUpdateForm(request.POST or None)
+    # If the form is valid, create new injury object with status defaulted to unpublished
     if form.is_valid():
-        news_link = form.cleaned_data['news_link']
-        description = form.cleaned_data['description']
-        email_body = 'News Link: {}\nDescription: {}'.format(news_link, description)
-        send_mail('Injury Update', email_body, 'baggedmilkme@gmail.com', ['codypollardeve@gmail.com'], fail_silently=False)
+        inj_form = form.save(commit=False)
+        inj_form.save()
         return redirect('wwdli-success')
 
-    return render(request, 'milk/wwdli.html', {'injury_obj': injury_obj, 'form': form})
+    return render(request, 'milk/wwdli.html', {'latest_injury': latest_injury, 'form': form,
+                                               'injury_list': injury_list})
 
 
 def paste_results(request):

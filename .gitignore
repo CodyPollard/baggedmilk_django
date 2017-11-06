@@ -1,6 +1,7 @@
 django_project/secret.py
 django_project/secret.pyc
 django_project/local_settings.py
+django_project/local_settings.pyc
 django_project/__pycache__
 milk/__pycache__
 .idea/

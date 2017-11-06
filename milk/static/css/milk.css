@@ -105,4 +105,10 @@ h1, h2, h3, h4 {
 /* Paste Tool Style */
 .text-compare {
         display: flex;
+        width: 100%
     }
+
+/* wwdli Style */
+.wwdli {
+    color: #EC5F00;
+}
