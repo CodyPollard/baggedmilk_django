@@ -10,7 +10,9 @@
           <p><strong>Time since last injury</strong></p>
 		  <p class="Timer">...</p>
 		  <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
-          <hr>
+          <p><strong>Updates</strong></p>
+		  <p>{{ latest_injury.description|safe }}</p>
+		  <hr>
 		  <p>Have I missed an injury? Let me know what I missed and I'll do my best to update it.</p>
 		  <form method="POST">
               {% csrf_token %}
