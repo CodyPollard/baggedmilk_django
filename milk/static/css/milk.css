@@ -112,3 +112,7 @@ h1, h2, h3, h4 {
 .wwdli {
     color: #EC5F00;
 }
+
+.timer p {
+    font-size: 17px;
+}

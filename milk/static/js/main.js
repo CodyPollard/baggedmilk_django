@@ -9,7 +9,7 @@ function timerTest() {
         var m = Math.floor(timeSince % 3600 / 60);
         var s = Math.floor(timeSince % 60);
         // Format time for display
-        $('.Timer').text(d + "d, " + h + "h, " + m + "m, " + s + "s")
+        $('.timer-clock').text(d + "d, " + h + "h, " + m + "m, " + s + "s")
     }, 1000);
 }
 

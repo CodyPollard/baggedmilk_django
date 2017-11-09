@@ -26,7 +26,8 @@ class DucksInjury(models.Model):
     published = models.BooleanField(default=False)
     last_injury = models.DateTimeField(default=datetime.now())
     news_link = models.CharField(default='', max_length=150)
-    description = models.TextField()
+    news_updates = models.TextField(default='There are no updates at this time.')
+    description = models.TextField(blank=True)
     headline = models.CharField(default=str(last_injury), max_length=150)
 
     def __str__(self):
