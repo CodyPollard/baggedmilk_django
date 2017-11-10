@@ -1,3 +1,6 @@
+<head>
+	<title>Success - Injury Report Received</title>
+</head>
 {% extends 'milk/base.html' %}
 {% load staticfiles %}
 {% block content %}
@@ -5,15 +8,19 @@
 <div class="container">
 	<div class="row">
 	  <div class="col-md-8">
-		  <h1 class="wwdli">When Were the Ducks Last Injured?</h1>
-          <hr>
-          <p><strong>Time since last injury</strong></p>
-		  <p class="Timer">...</p>
-		  <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
-          <p><strong>Updates</strong></p>
-		  <p>{{ latest_injury.description|safe }}</p>
-		  <hr>
-		  <p>Thank you for your submission I will get to it as soon as I can.</p>
+		  <div class="timer">
+			  <h1 class="wwdli">When Were the Ducks Last Injured?</h1>
+			  <hr>
+			  <p><strong>Time since last injury</strong></p>
+			  <p class="timer-clock">...</p>
+			  <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
+			  <p><strong>Updates</strong></p>
+			  <p>{{ latest_injury.news_updates|safe }}</p>
+			  <hr>
+		  </div>
+		  <div>
+			  <p>Thank you for your submission I will get to it as soon as I can.</p>
+		  </div>
 	  </div>
 	  <div class="col-md-4">
 	  	<h1 class="wwdli">Injury History</h1>
