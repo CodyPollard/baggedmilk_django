@@ -69,6 +69,7 @@ h1, h2, h3, h4 {
 	background: #3D5E92;
 }
 
+
 .navbar .navbar-nav > li > a {
 	color: #ffffff;
 }
@@ -115,4 +116,12 @@ h1, h2, h3, h4 {
 
 .timer p {
     font-size: 17px;
+}
+
+#wwdli-nav {
+	background: #1a1a1a;
+}
+
+#pucks img {
+    width: 40px;
 }
