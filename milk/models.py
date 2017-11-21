@@ -23,6 +23,7 @@ class Timer(models.Model):
 
 class DucksInjury(models.Model):
     # Model Fields
+    id = models.AutoField(primary_key=True)
     published = models.BooleanField(default=False)
     last_injury = models.DateTimeField(default=datetime.now())
     news_link = models.CharField(default='', max_length=150)

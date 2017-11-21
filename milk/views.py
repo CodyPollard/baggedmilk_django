@@ -1,4 +1,6 @@
 from datetime import timedelta, datetime
+
+from django.http import Http404
 from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
 from .models import Timer, DucksInjury
@@ -19,7 +21,17 @@ def wwdli_success(request):
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
     return render(request, 'milk/wwdli-success.html', {'latest_injury': latest_injury,
-                                               'injury_list': injury_list})
+                                                       'injury_list': injury_list})
+
+
+def wwdli_injury(request, injury_id):
+    try:
+        injury = DucksInjury.objects.get(pk=injury_id)
+        injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+    except DucksInjury.DoesNotExist:
+        raise Http404("Injury Doesn't Exist.")
+    return render(request, 'milk/wwdli-injury.html', {'injury': injury,
+                                                      'injury_list': injury_list})
 
 
 def wwdli(request):

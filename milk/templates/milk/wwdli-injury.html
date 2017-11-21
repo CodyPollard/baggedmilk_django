@@ -10,7 +10,8 @@
       gtag('js', new Date());
       gtag('config', '{{GA_KEY}}');
     </script>
-	<title>Success - Injury Report Received</title>
+	<title>Injury Tracker - When were the Anaheim Ducks last injured?</title>
+	<meta name="description" content="Anaheim Ducks injury tracker. Keep track of the latest Ducks injury and updates on current injuries for the NHL team.">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/milk.css' %}">
@@ -20,9 +21,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
+
   <body>
   <!-- Site wide nav -->
-  <nav class="navbar navbar-inverse navbar-static-top"  id="wwdli-nav">
+  <nav class="navbar navbar-inverse navbar-static-top" id="wwdli-nav">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">Bagged Milk</a>
@@ -41,28 +43,24 @@
 		  <div class="timer">
 			  <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
 			  <hr>
-			  <p><strong>Time since last injury</strong></p>
+			  <p><strong>Time since this injury</strong></p>
 			  <p class="timer-clock">...</p>
-			  <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
+			  <p><a href="{{ injury.news_link }}"><strong>{{ injury.headline }}</strong></a></p>
 			  <p><strong>Updates</strong></p>
-			  <p>{{ latest_injury.news_updates|safe }}</p>
-			  <hr>
-		  </div>
-		  <div>
-			  <p>Thank you for your submission I will get to it as soon as I can.</p>
+			  <p>{{ injury.news_updates|safe }}</p>
 		  </div>
 	  </div>
 	  <div class="col-md-4">
-	  	<h1 class="wwdli">Injury History</h1>
+	  	<h1 class="wwdli">Injury<br/>History</h1>
 		  <hr>
-            {% for injury in injury_list %}
-		  	<p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
+            {% for item in injury_list %}
+		  	<p>{{ item.last_injury.date }}: <a href="/wwdli/{{ item.id }}/">{{ item.headline }}</a></p>
 		  	{% endfor %}
 	  </div>
 	</div>
 </div>
 	<script>
-		var selected_date = new Date("{{ latest_injury.last_injury.isoformat }}")
+		var selected_date = new Date("{{ injury.last_injury.isoformat }}")
 	</script>
 	<script src="{% static 'js/main.js' %}" type="text/javascript"></script>
 	<script>window.onload=timerTest;</script>

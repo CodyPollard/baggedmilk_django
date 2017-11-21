@@ -64,7 +64,7 @@
 	  	<h1 class="wwdli">Injury History</h1>
 		  <hr>
             {% for injury in injury_list %}
-		  	<p>{{ injury.last_injury.date }}: <a href="{{ injury.news_link }}">{{ injury.headline }}</a></p>
+		  	<p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
 		  	{% endfor %}
 	  </div>
 	</div>
