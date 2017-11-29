@@ -3,7 +3,7 @@ from datetime import timedelta, datetime
 from django.http import Http404
 from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
-from .models import Timer, DucksInjury
+from .models import Timer, DucksInjury, DucksPlayer
 from django.core.mail import send_mail
 import re
 
@@ -20,23 +20,86 @@ def milkbot(request):
 def wwdli_success(request):
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
+    # Get all currently injured players
+    injured_players = DucksPlayer.objects.filter(healthy=False)
+    # Get stats for display in template
+    salary_hit = 0
+    forward, defense, goalie = 0, 0, 0
+    youth, regular, old = 0, 0, 0
+    # Loop through players to get stats
+    for i in injured_players:
+        # Get total salary hit
+        salary_hit += i.salary
+        # Get positions
+        if i.position == 'forward':
+            forward += 1
+        elif i.position == 'defense':
+            defense += 1
+        elif i.position == 'goalie':
+            goalie += 1
+        # Get ages
+        if i.age <= 25:
+            youth += 1
+        elif 25 < i.age < 35:
+            regular += 1
+        elif i.age >= 35:
+            old += 1
+
+    # Lists to use in template
+    ages = [youth, regular, old]
+    positions = [forward, defense, goalie]
     return render(request, 'milk/wwdli-success.html', {'latest_injury': latest_injury,
-                                                       'injury_list': injury_list})
+                                                       'injury_list': injury_list,
+                                                       'salary_hit': salary_hit,
+                                                       'ages': ages,
+                                                       'positions': positions})
 
 
 def wwdli_injury(request, injury_id):
     try:
         injury = DucksInjury.objects.get(pk=injury_id)
         injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+        player = injury.player
     except DucksInjury.DoesNotExist:
         raise Http404("Injury Doesn't Exist.")
     return render(request, 'milk/wwdli-injury.html', {'injury': injury,
-                                                      'injury_list': injury_list})
+                                                      'injury_list': injury_list,
+                                                      'player': player})
 
 
 def wwdli(request):
+    # Get all published injuries
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
+    # Get all currently injured players
+    injured_players = DucksPlayer.objects.filter(healthy=False)
+    # Get stats for display in template
+    salary_hit = 0
+    forward, defense, goalie = 0, 0, 0
+    youth, regular, old = 0, 0, 0
+    # Loop through players to get stats
+    for i in injured_players:
+        # Get total salary hit
+        salary_hit += i.salary
+        # Get positions
+        if i.position == 'forward':
+            forward += 1
+        elif i.position == 'defense':
+            defense += 1
+        elif i.position == 'goalie':
+            goalie += 1
+        # Get ages
+        if i.age <= 25:
+            youth += 1
+        elif 25 < i.age < 35:
+            regular += 1
+        elif i.age >= 35:
+            old += 1
+
+    # Lists to use in template
+    ages = [youth, regular, old]
+    positions = [forward, defense, goalie]
+
     # Form
     form = InjuryUpdateForm(request.POST or None)
     # If the form is valid, create new injury object with status defaulted to unpublished
@@ -46,7 +109,10 @@ def wwdli(request):
         return redirect('wwdli-success')
 
     return render(request, 'milk/wwdli.html', {'latest_injury': latest_injury, 'form': form,
-                                               'injury_list': injury_list})
+                                               'injury_list': injury_list,
+                                               'salary_hit': salary_hit,
+                                               'ages': ages,
+                                               'positions': positions})
 
 
 def paste_results(request):

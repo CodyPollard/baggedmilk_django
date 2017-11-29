@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load humanize %}
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -52,12 +53,17 @@
 			  <p>Thank you for your submission I will get to it as soon as I can.</p>
 		  </div>
 	  </div>
-	  <div class="col-md-4">
-	  	<h1 class="wwdli">Injury History</h1>
-		  <hr>
+	  <div class="col-md-4 sidebar">
+          <h1 class="wwdli">Stats<br/>Breakdown</h1>
+          <hr>
+          <p>Total Salary Hit: <br/><strong>${{salary_hit|intcomma}}</strong></p>
+          <p>Injuries by Position: <br/>Forward: {{positions.0}}<br/>Defense: {{positions.1}}<br/>Goalie: {{positions.2}}</p>
+          <p>Injuries by Age:<br/>18-25: {{ ages.0 }}<br/>26-35: {{ ages.1 }}<br/>Old Geezer: {{ ages.2 }}</p>
+          <h1 class="wwdli">Injury History</h1>
+          <hr>
             {% for injury in injury_list %}
-		  	<p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
-		  	{% endfor %}
+            <p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
+            {% endfor %}
 	  </div>
 	</div>
 </div>

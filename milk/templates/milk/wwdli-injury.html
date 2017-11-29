@@ -50,12 +50,16 @@
 			  <p>{{ injury.news_updates|safe }}</p>
 		  </div>
 	  </div>
-	  <div class="col-md-4">
-	  	<h1 class="wwdli">Injury<br/>History</h1>
-		  <hr>
-            {% for item in injury_list %}
-		  	<p>{{ item.last_injury.date }}: <a href="/wwdli/{{ item.id }}/">{{ item.headline }}</a></p>
-		  	{% endfor %}
+	  <div class="col-md-4 sidebar">
+          <h1 class="wwdli">Player<br/>Breakdown</h1>
+          <hr>
+          <strong>{{player.name}}</strong><br/>Salary: {{player.salary}}<br/>Position: {{player.position}}<br/>Age: {{player.age}}</p>
+          <hr>
+        <h1 class="wwdli">Injury History</h1>
+        <hr>
+        {% for item in injury_list %}
+        <p>{{ item.last_injury.date }}: <a href="/wwdli/{{ item.id }}/">{{ item.headline }}</a></p>
+        {% endfor %}
 	  </div>
 	</div>
 </div>
