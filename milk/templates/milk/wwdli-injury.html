@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load humanize %}
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -38,30 +39,36 @@
     </nav>
 <!-- Top Section -->
 <div class="container">
-	<div class="row">
-	  <div class="col-md-8">
-		  <div class="timer">
-			  <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
-			  <hr>
-			  <p><strong>Time since this injury</strong></p>
-			  <p class="timer-clock">...</p>
-			  <p><a href="{{ injury.news_link }}"><strong>{{ injury.headline }}</strong></a></p>
-			  <p><strong>Updates</strong></p>
-			  <p>{{ injury.news_updates|safe }}</p>
-		  </div>
-	  </div>
-	  <div class="col-md-4 sidebar">
-          <h1 class="wwdli">Player<br/>Breakdown</h1>
-          <hr>
-          <strong>{{player.name}}</strong><br/>Salary: {{player.salary}}<br/>Position: {{player.position}}<br/>Age: {{player.age}}</p>
-          <hr>
-        <h1 class="wwdli">Injury History</h1>
-        <hr>
-        {% for item in injury_list %}
-        <p>{{ item.last_injury.date }}: <a href="/wwdli/{{ item.id }}/">{{ item.headline }}</a></p>
-        {% endfor %}
-	  </div>
-	</div>
+	<!-- Row one. Contains Timer and Stats Breakdown -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="timer" style="text-align: center;">
+                <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
+                <hr>
+                <!-- Stats Breakdown -->
+                <p class="breakdown"><strong>{{player.name}}</strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.position}}<br/>Age: {{player.age}}<br/>
+                    {% if player.healthy %}
+                    Status: Healthy
+                    {% else %}
+                    Status: Injured
+                    {% endif %}
+                </p><hr>
+                <p><strong>Time since this injury</strong></p>
+                <p class="timer-clock">...</p>
+                <p><a href="{{ injury.news_link }}"><strong>{{ injury.headline }}</strong></a></p>
+                <p><strong>Updates</strong></p>
+                <p>{{ injury.news_updates|safe }}</p><br/>
+            </div>
+
+        </div>
+        <div class="col-md-4 sidebar">
+            <h1 class="wwdli">Injury<br/>History</h1>
+            <hr>
+            {% for injury in injury_list %}
+                <p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 	<script>
 		var selected_date = new Date("{{ injury.last_injury.isoformat }}")

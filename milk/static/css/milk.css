@@ -1,13 +1,54 @@
 /* Tablet Style */
 @media (max-width: 768px) {
 
+    hr {
+        width: 60%;
+    }
+
+    .sidebar {
+        margin-top: 50px;
+    }
+
+    .wwdli {
+        text-align: center;
+    }
+
+    .top40 {
+        margin-top:40px;
+    }
+
+    .mobile {
+        display: none;
+    }
 }
 
 /* Mobile Style */
 @media (max-width: 425px) {
     .text-compare {
-        max-width: 200px;
+        max-width: 100%;
     }
+
+    .mobile {
+        display: none;
+    }
+
+    .wwdli {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    hr {
+        width: 60%;
+    }
+
+    .sidebar {
+        margin-top: 50px;
+    }
+
+    .top40 {
+        margin-top:40px;
+    }
+
 }
 
 /* Browser Style */
@@ -39,6 +80,10 @@ input[type="password"] {
     float: right;
     width: 100%;
     margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    width: 100%;
 }
 
 select {
@@ -79,6 +124,8 @@ h1, h2, h3, h4 {
 	font-weight: bold;
 }
 
+
+
 /* Dropdown Styles */
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
@@ -105,8 +152,8 @@ h1, h2, h3, h4 {
 
 /* Paste Tool Style */
 .text-compare {
-        display: flex;
-        width: 100%
+    display: flex;
+    width: 100%
 }
 
 /* wwdli Style */
@@ -114,8 +161,8 @@ h1, h2, h3, h4 {
     color: #EC5F00;
 }
 
-.timer p {
-    font-size: 17px;
+p {
+    font-size: 16px;
 }
 
 #wwdli-nav {
@@ -124,4 +171,17 @@ h1, h2, h3, h4 {
 
 #pucks img {
     width: 40px;
+}
+
+.wwdli-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.wwdli-table th td{
+    font-size: 16px;
+}
+
+.breakdown {
+    text-align: center;
 }

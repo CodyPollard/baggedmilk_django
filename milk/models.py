@@ -27,6 +27,7 @@ class DucksPlayer(models.Model):
     salary = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
     healthy = models.BooleanField(default=False)
+    injury_type = models.CharField(max_length=50, default='N/A')
 
     def __str__(self):
         return self.name
@@ -36,8 +37,8 @@ class DucksInjury(models.Model):
     # Model Fields
     id = models.AutoField(primary_key=True)
     published = models.BooleanField(default=False)
-    player = models.ForeignKey(DucksPlayer)
-    last_injury = models.DateTimeField(default=datetime.now())
+    player = models.ForeignKey(DucksPlayer, default=1)
+    last_injury = models.DateTimeField(default=datetime.now)
     news_link = models.CharField(default='', max_length=150)
     news_updates = models.TextField(default='There are no updates at this time.')
     description = models.TextField(blank=True)

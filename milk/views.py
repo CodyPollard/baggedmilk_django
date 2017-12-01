@@ -24,18 +24,20 @@ def wwdli_success(request):
     injured_players = DucksPlayer.objects.filter(healthy=False)
     # Get stats for display in template
     salary_hit = 0
-    forward, defense, goalie = 0, 0, 0
+    forward = ['lw', 'c', 'rw']
+    defense = ['ld', 'rd']
+    fwd, de, goalie = 0, 0, 0
     youth, regular, old = 0, 0, 0
     # Loop through players to get stats
     for i in injured_players:
         # Get total salary hit
         salary_hit += i.salary
         # Get positions
-        if i.position == 'forward':
-            forward += 1
-        elif i.position == 'defense':
-            defense += 1
-        elif i.position == 'goalie':
+        if i.position.lower().split(',')[0] in forward:
+            fwd += 1
+        elif i.position.lower().split(',')[0] in defense:
+            de += 1
+        elif i.position.lower() == 'g':
             goalie += 1
         # Get ages
         if i.age <= 25:
@@ -47,9 +49,10 @@ def wwdli_success(request):
 
     # Lists to use in template
     ages = [youth, regular, old]
-    positions = [forward, defense, goalie]
+    positions = [fwd, de, goalie]
     return render(request, 'milk/wwdli-success.html', {'latest_injury': latest_injury,
                                                        'injury_list': injury_list,
+                                                       'injured_players': injured_players,
                                                        'salary_hit': salary_hit,
                                                        'ages': ages,
                                                        'positions': positions})
@@ -75,18 +78,20 @@ def wwdli(request):
     injured_players = DucksPlayer.objects.filter(healthy=False)
     # Get stats for display in template
     salary_hit = 0
-    forward, defense, goalie = 0, 0, 0
+    forward = ['lw', 'c', 'rw']
+    defense = ['ld', 'rd']
+    fwd, de, goalie = 0, 0, 0
     youth, regular, old = 0, 0, 0
     # Loop through players to get stats
     for i in injured_players:
         # Get total salary hit
         salary_hit += i.salary
         # Get positions
-        if i.position == 'forward':
-            forward += 1
-        elif i.position == 'defense':
-            defense += 1
-        elif i.position == 'goalie':
+        if i.position.lower().split(',')[0] in forward:
+            fwd += 1
+        elif i.position.lower().split(',')[0] in defense:
+            de += 1
+        elif i.position.lower() == 'g':
             goalie += 1
         # Get ages
         if i.age <= 25:
@@ -98,8 +103,7 @@ def wwdli(request):
 
     # Lists to use in template
     ages = [youth, regular, old]
-    positions = [forward, defense, goalie]
-
+    positions = [fwd, de, goalie]
     # Form
     form = InjuryUpdateForm(request.POST or None)
     # If the form is valid, create new injury object with status defaulted to unpublished
@@ -110,6 +114,7 @@ def wwdli(request):
 
     return render(request, 'milk/wwdli.html', {'latest_injury': latest_injury, 'form': form,
                                                'injury_list': injury_list,
+                                               'injured_players': injured_players,
                                                'salary_hit': salary_hit,
                                                'ages': ages,
                                                'positions': positions})

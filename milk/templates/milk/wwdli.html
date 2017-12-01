@@ -39,41 +39,64 @@
     </nav>
 <!-- Top Section -->
 <div class="container">
-	<div class="row">
-	  <div class="col-md-8">
-		  <div class="timer">
-			  <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
-			  <hr>
-			  <p><strong>Time since last injury</strong></p>
-			  <p class="timer-clock">...</p>
-			  <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
-			  <p><strong>Updates</strong></p>
-			  <p>{{ latest_injury.news_updates|safe }}</p>
-			  <hr>
-		  </div>
-		  <div>
-			  <p>Have I missed an injury? Let me know what I missed and I'll do my best to update it.</p>
-			  <form method="POST">
-				  {% csrf_token %}
-				  {{ form.as_p }}
-				  {{ form.errors }}
-				  <input type="submit">
-			  </form>
-		  </div>
-	  </div>
-	  <div class="col-md-4 sidebar">
-	  	<h1 class="wwdli">Stats<br/>Breakdown</h1>
-		  <hr>
-          <p>Total Salary Hit: <br/><strong>${{salary_hit|intcomma}}</strong></p>
-          <p>Injuries by Position: <br/>Forward: {{positions.0}}<br/>Defense: {{positions.1}}<br/>Goalie: {{positions.2}}</p>
-          <p>Injuries by Age:<br/>18-25: {{ ages.0 }}<br/>26-35: {{ ages.1 }}<br/>Old Geezer: {{ ages.2 }}</p>
-          <h1 class="wwdli">Injury History</h1>
-		  <hr>
+    <!-- Row one -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="timer">
+                <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
+                <hr>
+                <p><strong>Time since last injury</strong></p>
+                <p class="timer-clock">...</p>
+                <p><a href="{{ latest_injury.news_link }}"><strong>{{ latest_injury.headline }}</strong></a></p>
+                <p><strong>Updates</strong></p>
+                <p>{{ latest_injury.news_updates|safe }}</p>
+            </div>
+            <hr>
+            <!-- Stats Breakdown -->
+            <div class="breakdown">
+                <div class="breakdown-left">
+                    <p><b>Total Salary Hit</b> <br/>${{salary_hit|intcomma}}</p>
+                    <p><b>Injuries by Position</b> <br/>Forward: {{positions.0}}<br/>Defense: {{positions.1}}<br/>Goalie: {{positions.2}}</p>
+                    <p><b>Injuries by Age</b><br/>18-25: {{ ages.0 }}<br/>26-34: {{ ages.1 }}<br/>Old Geezer: {{ ages.2 }}</p><br/>
+                    <table class="wwdli-table">
+                        <tr>
+                            <td><b>Player</b></td>
+                            <td><b>Position</b></td>
+                            <td><b>Salary</b></td>
+                            <td><b>Injury</b></td>
+                        </tr>
+                        {% for player in injured_players %}
+                            <tr>
+                                <td>{{player.name}}</td>
+                                <td>{{player.position}}</td>
+                                <td>${{player.salary|intcomma}}</td>
+                                <td>{{player.injury_type}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <!-- Form -->
+            <div>
+                <p><b>Have I missed an injury? Let me know what I missed and I'll do my best to update it.</b></p>
+                <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.errors }}
+                <input type="submit">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 sidebar">
+            <h1 class="wwdli">Injury<br/>History</h1>
+            <hr>
             {% for injury in injury_list %}
-		  	<p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
-		  	{% endfor %}
-	  </div>
-	</div>
+                <p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- End row one. -->
 </div>
 	<script>
 		var selected_date = new Date("{{ latest_injury.last_injury.isoformat }}")
