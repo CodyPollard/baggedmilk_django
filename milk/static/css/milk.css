@@ -178,10 +178,15 @@ p {
     table-layout: fixed;
 }
 
-.wwdli-table th td{
+.wwdli-table td{
     font-size: 16px;
+    height: 25px;
 }
 
 .breakdown {
     text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(236, 95, 0, 0.15);
 }

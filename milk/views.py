@@ -21,7 +21,7 @@ def wwdli_success(request):
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
     # Get all currently injured players
-    injured_players = DucksPlayer.objects.filter(healthy=False)
+    injured_players = DucksPlayer.objects.filter(healthy=False).order_by('-salary')
     # Get stats for display in template
     salary_hit = 0
     forward = ['lw', 'c', 'rw']
@@ -75,7 +75,7 @@ def wwdli(request):
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
     # Get all currently injured players
-    injured_players = DucksPlayer.objects.filter(healthy=False)
+    injured_players = DucksPlayer.objects.filter(healthy=False).order_by('-salary')
     # Get stats for display in template
     salary_hit = 0
     forward = ['lw', 'c', 'rw']
