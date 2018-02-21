@@ -1,10 +1,9 @@
 from datetime import timedelta, datetime
-
+from django.forms import formset_factory
 from django.http import Http404
 from django.shortcuts import render, redirect
-from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm
+from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm, PollQuestionForm, PollChoiceForm
 from .models import Timer, DucksInjury, DucksPlayer
-from django.core.mail import send_mail
 import re
 
 
@@ -15,6 +14,24 @@ def index(request):
 
 def milkbot(request):
     return render(request, 'milk/milkbot.html')
+
+
+def poll(request):
+    question_form = PollQuestionForm(request.POST or None)
+    choice_form = PollChoiceForm(request.POST or None)
+
+    # new_poll_set = formset_factory(PollQuestionForm, PollChoiceForm)
+    # If the form is valid
+    if question_form.is_valid() and choice_form.is_valid():
+        question_form = question_form.save(commit=False)
+        choice_form = choice_form.save(commit=False)
+
+        # Save forms
+        question_form.save()
+        choice_form.save()
+        return redirect('poll')
+    return render(request, 'milk/poll.html', {'question_form' : question_form,
+                                              'choice_form' : choice_form})
 
 
 def wwdli_success(request):

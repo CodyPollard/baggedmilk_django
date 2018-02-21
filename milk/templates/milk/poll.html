@@ -1,0 +1,32 @@
+<head>
+	<title>Bagged Milk</title>
+</head>
+{% extends 'milk/base.html' %}
+{% block content %}
+<!-- Top Section -->
+<div class="container">
+	<div class="row">
+	  <div class="col-md-8">
+		  <h1>Discord Poll</h1>
+		  <hr>
+		  <p>Once your poll is created it will be posted in Discord.</p>
+		  <form method="POST">
+                {% csrf_token %}
+                {{ question_form.as_p }}
+			  	{{ choice_form.as_p }}
+                {{ question_form.errors }}
+			  	<input type="submit">
+		  </form>
+	  </div>
+
+	  <div class="col-md-4">
+	  	<h2>Contact</h2>
+            <address>
+                <strong>Bagged Milk</strong><br>
+                <a href="mailto:codypollardeve@gmail.com">Email</a><br>
+                <a href="https://github.com/CodyPollard">GitHub</a><br>
+            </address>
+	  </div>
+	</div>
+</div>
+{% endblock %}

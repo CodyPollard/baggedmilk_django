@@ -1,5 +1,6 @@
 from django import forms
-from .models import Timer, DucksInjury
+from django.forms import inlineformset_factory
+from .models import Timer, DucksInjury, PollQuestion, PollChoice
 from django_project.secret import TIMERBOARD_KEY
 
 
@@ -60,4 +61,16 @@ class InjuryUpdateForm(forms.ModelForm):
     class Meta:
         model = DucksInjury
         fields = ('news_link', 'description')
+
+
+class PollQuestionForm(forms.ModelForm):
+    class Meta:
+        model = PollQuestion
+        fields = ('question',)
+
+
+class PollChoiceForm(forms.ModelForm):
+    class Meta:
+        model = PollChoice
+        fields = ('choice_text',)
 
