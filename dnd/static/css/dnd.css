@@ -1,0 +1,192 @@
+/* Tablet Style */
+@media (max-width: 768px) {
+
+    hr {
+        width: 60%;
+    }
+
+    .sidebar {
+        margin-top: 50px;
+    }
+
+    .wwdli {
+        text-align: center;
+    }
+
+    .top40 {
+        margin-top:40px;
+    }
+
+    .mobile {
+        display: none;
+    }
+}
+
+/* Mobile Style */
+@media (max-width: 425px) {
+    .text-compare {
+        max-width: 100%;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .wwdli {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    hr {
+        width: 60%;
+    }
+
+    .sidebar {
+        margin-top: 50px;
+    }
+
+    .top40 {
+        margin-top:40px;
+    }
+
+}
+
+/* Browser Style */
+img {
+	max-width: 300px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+}
+
+input[type="text"] {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="password"] {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    width: 100%;
+}
+
+select {
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+}​
+
+select {
+	width: 100%;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4 {
+	color: #3D5E92;
+	font-weight: bold;
+}
+
+.navbar {
+	background: #3D5E92;
+}
+
+
+.navbar .navbar-nav > li > a {
+	color: #ffffff;
+}
+
+.navbar .navbar-header > a {
+	color: white;
+	font-weight: bold;
+}
+
+
+
+/* Dropdown Styles */
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+    background: #3D5E92;
+}
+
+.navbar .navbar-nav > li > a {
+    color: white;
+	font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    color: white;
+	font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
+    background: grey;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+    background: #3D5E92;
+}
+
+/* Paste Tool Style */
+.text-compare {
+    display: flex;
+    width: 100%
+}
+
+/* wwdli Style */
+.wwdli {
+    color: #EC5F00;
+}
+
+p {
+    font-size: 16px;
+}
+
+#wwdli-nav {
+	background: #1a1a1a;
+}
+
+#pucks img {
+    width: 40px;
+}
+
+.wwdli-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.wwdli-table td{
+    font-size: 16px;
+    height: 25px;
+}
+
+.breakdown {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(236, 95, 0, 0.15);
+}

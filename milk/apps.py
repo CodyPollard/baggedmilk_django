@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class MilkConfig(AppConfig):
-    name = 'milk.css'
+    name = 'dnd.css'

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_KEY}}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{GA_KEY}}');
+    </script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/milk.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="shortcut icon" type="img/ico" href="{% static 'favicon.ico' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+  <!-- Site wide nav -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">D&D Tools</a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/dice"><strong>dice-roller</strong></a></li>
+            <li><a href="/shops"><strong>shops</strong></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    {% block js-foot %}
+    {% endblock %}
+    <!-- Footer -->
+    <footer class="footer">
+    <hr>
+      <div class="container text-center">
+        <p class="text-muted">Copyright &copy; {% now "Y" %} Baggedmilk.me<br>
+        <a href="mailto:codypollardeve@gmail.com">codypollardeve@gmail.com</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
