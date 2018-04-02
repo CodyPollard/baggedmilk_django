@@ -1,0 +1,35 @@
+<head>
+	<title>Dice Roller</title>
+</head>
+{% extends 'dnd/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!-- Top Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Dice-Roller</h1>
+            <hr>
+            <label for="d6in">Notation</label>
+            <input type="text" autofocus id="d6in">
+            <button type="submit" id="d6">Roll d6</button>
+    </div>
+
+	  <div class="col-md-4">
+		  <h1>Log</h1>
+          <hr>
+            <textarea rows="1" id="output" readonly placeholder="No dice rolled"></textarea>
+            <!--<button onclick="clearLog()">Clear log</button>-->
+	  </div>
+	</div>
+</div>
+{% endblock %}
+{% block js-foot %}
+<script src="{% static 'js/dice-roller.js' %}" type="text/javascript"></script>
+<script>
+
+
+
+
+</script>
+{% endblock %}
