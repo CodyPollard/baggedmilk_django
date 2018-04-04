@@ -124,7 +124,14 @@ h1, h2, h3, h4 {
 	font-weight: bold;
 }
 
+/* Nav Styles */
+#user_login {
+    float: right;
+}
 
+.navbar-nav> li {
+	color: white;
+}
 
 /* Dropdown Styles */
 
