@@ -4,6 +4,9 @@ django_project/local_settings.py
 django_project/local_settings.pyc
 django_project/__pycache__
 milk/__pycache__
+milk/migrations/__pycache__
+dnd/__pycache__
+dnd/migrations/__pycache__
 .idea/
 
 # Byte-compiled / optimized / DLL files
