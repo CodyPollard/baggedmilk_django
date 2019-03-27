@@ -8,6 +8,7 @@ milk/migrations/__pycache__
 dnd/__pycache__
 dnd/migrations/__pycache__
 .idea/
+*.pyc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
