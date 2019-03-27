@@ -12,9 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = secret.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dnd.localhost', 'localhost']
+ALLOWED_HOSTS = ['www.gpdigital.dev', 'gpdigital.dev', '138.197.0.68', 'localhost']
 
 
 # Application definition
@@ -31,13 +31,13 @@ INSTALLED_APPS = [
     # My apps
     'milk',
     'dnd',
-    'django_hosts',
+    # 'django_hosts',
     # Analytics
 ]
 
 MIDDLEWARE = [
     # Django_hosts
-    'django_hosts.middleware.HostsRequestMiddleware',
+    # 'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Django_hosts
-    'django_hosts.middleware.HostsResponseMiddleware',
+    # 'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -119,6 +119,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+)
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'  # GMAIL SMTP
