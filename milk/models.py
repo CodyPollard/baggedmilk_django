@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 import random, string
 
 
@@ -34,6 +35,7 @@ class DucksPlayer(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class DucksInjury(models.Model):
     # Model Fields
     id = models.AutoField(primary_key=True)
