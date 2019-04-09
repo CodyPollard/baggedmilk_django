@@ -196,3 +196,7 @@ def timerboard(request):
             timer.end_at = '%02d:%02d:%02d' % (hours, minutes, seconds)
 
     return render(request, 'milk/timerboard.html', {'form': form, 'all_timers': all_timers})
+
+
+def jeff_xml(request):
+    return render(request, 'milk/jeff-xml.html')

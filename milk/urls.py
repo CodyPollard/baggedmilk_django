@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^wwdli/(?P<injury_id>[0-9]+)/$', views.wwdli_injury, name='wwdli-injury'),
     url(r'^wwdli-success/$', views.wwdli_success, name='wwdli-success'),
     url(r'^poll/$', views.poll, name='poll'),
+    url(r'^download/eljefe-jeffe', views.jeff_xml, name='jeff-xml'),
 ]

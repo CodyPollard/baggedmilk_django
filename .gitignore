@@ -9,6 +9,7 @@ dnd/__pycache__
 dnd/migrations/__pycache__
 .idea/
 *.pyc
+test.sqlite3
 
 
 # Byte-compiled / optimized / DLL files
