@@ -137,6 +137,11 @@ def wwdli(request):
                                                'positions': positions})
 
 
+def wwdli_roster_ducks(request):
+    ducks_roster = DucksPlayer.objects.all()
+    return render(request, 'milk/wwdli-roster-ducks.html', {'ducks_roster': ducks_roster})
+
+
 def paste_results(request):
     return render(request, 'milk/paste-results.html')
 
