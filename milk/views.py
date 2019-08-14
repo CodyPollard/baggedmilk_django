@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime
 from django.forms import formset_factory
-from django.http import Http404
+from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm, PollQuestionForm, PollChoiceForm
 from .models import Timer, DucksInjury, DucksPlayer
@@ -140,6 +140,16 @@ def wwdli(request):
 def wwdli_roster_ducks(request):
     ducks_roster = DucksPlayer.objects.all()
     return render(request, 'milk/wwdli-roster-ducks.html', {'ducks_roster': ducks_roster})
+
+
+def wwdli_player(request, player_name):
+    player = DucksPlayer.objects.get(name=player_name)
+    injury_list = DucksInjury.objects.filter(player=player)
+    # injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+    if player is None:
+        return HttpResponseNotFound('<h1>Player not found. Check rosters for available players.</h1>')
+    return render(request, 'milk/wwdli-player-breakdown.html', {'player': player,
+                                                                'injury_list': injury_list})
 
 
 def paste_results(request):
