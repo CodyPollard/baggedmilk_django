@@ -35,12 +35,27 @@ class DucksPlayer(models.Model):
         return self.name
 
 
+class IndividualPlayer(models.Model):
+    name = models.CharField(max_length=100, default='Undefined')
+    pos = models.CharField(max_length=15, default='None')
+    salary = models.IntegerField(default=0)
+    age = models.IntegerField(default=0)
+    healthy = models.BooleanField(default=False)
+    injury_type = models.CharField(max_length=50, default='N/A')
+    games_missed = models.TextField(null=True)
+    games_played = models.TextField(null=True)
+    injury_streaks = models.TextField(null=True)
+
+    def __str__(self):
+        return self.name
+
+
 @python_2_unicode_compatible
 class DucksInjury(models.Model):
     # Model Fields
     id = models.AutoField(primary_key=True)
     published = models.BooleanField(default=False)
-    player = models.ForeignKey(DucksPlayer, default=1)
+    player = models.ForeignKey(DucksPlayer, default=1, on_delete=models.CASCADE)
     last_injury = models.DateTimeField(default=datetime.now)
     news_link = models.CharField(default='', max_length=150)
     news_updates = models.TextField(default='There are no updates at this time.')

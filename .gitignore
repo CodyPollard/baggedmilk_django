@@ -10,6 +10,9 @@ dnd/migrations/__pycache__
 .idea/
 *.pyc
 test.sqlite3
+milk/migrations/
+dnd/migrations/
+fixtures/
 
 
 # Byte-compiled / optimized / DLL files
