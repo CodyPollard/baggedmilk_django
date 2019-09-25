@@ -67,4 +67,4 @@ class PollChoice(models.Model):
 
     def __str__(self):
         return self.choice_text
->>>>>>> 1a5b6de1e2c622a00dc7e0753cf41d39fa939aea
+
