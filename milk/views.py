@@ -177,8 +177,12 @@ def wwdli_player(request, player_name):
         blocks += game.blocks
         hits += game.hits
     # injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
-    avg_shifts = shifts/game_list.count()
-    avg_toi = toi/game_list.count()
+    try:
+        avg_shifts = shifts/game_list.count()
+        avg_toi = toi/game_list.count()
+    except ZeroDivisionError:
+        avg_shifts = 0
+        avg_toi = 0
     player_stats = [goals, assists, pm, pim, shots, hits, blocks, avg_shifts, avg_toi]
     if player is None:
         return HttpResponseNotFound('<h1>Player not found. Check rosters for available players.</h1>')
