@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load humanize %}
+{% load roster_tags %}
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -47,7 +48,7 @@
                 <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
                 <hr>
                 <!-- Stats Breakdown -->
-                <p class="breakdown"><strong>{{player.name}}</strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.pos}}<br/>Age: {{player.age}}<br/>
+                <p class="breakdown"><strong><a href="/wwdli/roster/ducks/{{player.name}}/">{{player.name|format_name}}</a></strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.pos}}<br/>Age: {{player.age}}<br/>
                     {% if player.healthy %}
                     Status: Healthy
                     {% else %}
