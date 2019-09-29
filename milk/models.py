@@ -4,11 +4,6 @@ from django.utils.encoding import python_2_unicode_compatible
 import random, string
 
 
-# Create your models here.
-class Testing(models.Model):
-    test_string = models.CharField(max_length=50)
-
-
 class Timer(models.Model):
     # Types
     TYPE_CHOICES = ['EC - Sotiyo', 'EC - Azbel', 'EC - Raitaru', 'Cit - Keepstar', 'Cit - Fortizar',
@@ -23,9 +18,12 @@ class Timer(models.Model):
         return str(self.timer_ends_at)
 
 
-class DucksPlayer(models.Model):
+# WWDLI #
+
+class IndividualPlayer(models.Model):
+    # Fields
     name = models.CharField(max_length=100, default='Undefined')
-    position = models.CharField(max_length=15, default='None')
+    pos = models.CharField(max_length=15, default='None')
     salary = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
     healthy = models.BooleanField(default=False)
@@ -35,12 +33,35 @@ class DucksPlayer(models.Model):
         return self.name
 
 
+class RegularSeasonGame(models.Model):
+    # Fields
+    player = models.ForeignKey(IndividualPlayer, on_delete=models.CASCADE)
+    game = models.ForeignKey('IndividualGame')
+    # Stats
+    goals = models.IntegerField(default=0)
+    assists = models.IntegerField(default=0)
+    pm = models.IntegerField(default=0)
+    pim = models.IntegerField(default=0)
+    shots = models.IntegerField(default=0)
+    shifts = models.IntegerField(default=0)
+    toi = models.IntegerField(default=0)
+    # Advanced
+    hits = models.IntegerField(default=0)
+    blocks = models.IntegerField(default=0)
+
+    def __str__(self):
+        if self.game.id is not None:
+            return '{}:{}'.format(self.game.id, self.player.name)
+        else:
+            return 'N/A:%s' % self.player.name
+
+
 @python_2_unicode_compatible
 class DucksInjury(models.Model):
-    # Model Fields
+    # Fields
     id = models.AutoField(primary_key=True)
     published = models.BooleanField(default=False)
-    player = models.ForeignKey(DucksPlayer, default=1, on_delete=models.CASCADE)
+    player = models.ForeignKey(IndividualPlayer, default=1, on_delete=models.CASCADE)
     last_injury = models.DateTimeField(default=datetime.now)
     news_link = models.CharField(default='', max_length=150)
     news_updates = models.TextField(default='There are no updates at this time.')
@@ -49,6 +70,16 @@ class DucksInjury(models.Model):
 
     def __str__(self):
         return self.headline
+
+
+class IndividualGame(models.Model):
+    # Fields
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime.now)
+    roster = models.ForeignKey(RegularSeasonGame, default=None, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)
 
 
 class PollQuestion(models.Model):

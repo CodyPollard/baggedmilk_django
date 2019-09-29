@@ -13,6 +13,7 @@ test.sqlite3
 milk/migrations/
 dnd/migrations/
 fixtures/
+Makefile
 
 
 # Byte-compiled / optimized / DLL files

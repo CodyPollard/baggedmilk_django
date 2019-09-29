@@ -33,6 +33,7 @@
         <div id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="/wwdli"><strong>WWDLI?</strong></a></li>
+            <li><a href="/wwdli/roster/ducks"><strong>Full Roster</strong></a></li>
           </ul>
         </div>
       </div>
@@ -46,7 +47,7 @@
                 <h1 class="wwdli">When Were the Anaheim Ducks Last Injured?</h1>
                 <hr>
                 <!-- Stats Breakdown -->
-                <p class="breakdown"><strong>{{player.name}}</strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.position}}<br/>Age: {{player.age}}<br/>
+                <p class="breakdown"><strong>{{player.name}}</strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.pos}}<br/>Age: {{player.age}}<br/>
                     {% if player.healthy %}
                     Status: Healthy
                     {% else %}
@@ -76,7 +77,7 @@
 	<script src="{% static 'js/main.js' %}" type="text/javascript"></script>
 	<script>window.onload=timerTest;</script>
   <!-- Footer -->
-    <footer class="footer">
+    <footer class="navbar-fixed-bottom">
     <hr>
       <div class="container text-center">
         <p class="text-muted">Copyright &copy; {% now "Y" %} gpdigital.dev<br>

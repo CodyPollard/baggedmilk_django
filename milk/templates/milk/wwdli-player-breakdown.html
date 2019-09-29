@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load humanize %}
+{% load roster_tags %}
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -33,6 +34,7 @@
         <div id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="/wwdli"><strong>WWDLI?</strong></a></li>
+            <li><a href="/wwdli/roster/ducks"><strong>Full Roster</strong></a></li>
           </ul>
         </div>
       </div>
@@ -46,17 +48,45 @@
                 <h1 class="wwdli">Player Breakdown</h1>
                 <hr>
                 <!-- Stats Breakdown -->
-                <p class="breakdown"><strong>{{player.name}}</strong><br/>Salary: ${{player.salary|intcomma}}<br/>Position: {{player.position}}<br/>Age: {{player.age}}<br/>
+                <p class="breakdown"><strong>{{player.name|format_name}}</strong>
+                                    <br/>Salary: ${{player.salary|intcomma}}
+                                    <br/>Position: {{player.pos}}
+                                    <br/>Age: {{player.age}}<br/>
                     {% if player.healthy %}
                     Status: Healthy
                     {% else %}
                     Status: Injured
                     {% endif %}
                 </p><hr>
+                <!-- Season Stats for Player -->
+                <table class="wwdli-table">
+                        <tr>
+                            <td><b>Goals</b></td>
+                            <td><b>Assists</b></td>
+                            <td><b>+/-</b></td>
+                            <td><b>PIM</b></td>
+                            <td><b>Shots</b></td>
+                            <td><b>Hits</b></td>
+                            <td><b>Blocks</b></td>
+                            <td><b>Avg Shifts</b></td>
+                            <td><b>Avg TOI</b></td>
+                        </tr>
+                        <tr>
+                            <td>{{player_stats.0}}</td>
+                            <td>{{player_stats.1}}</td>
+                            <td>{{player_stats.2}}</td>
+                            <td>{{player_stats.3}}</td>
+                            <td>{{player_stats.4}}</td>
+                            <td>{{player_stats.5}}</td>
+                            <td>{{player_stats.6}}</td>
+                            <td>{{player_stats.7}}</td>
+                            <td>{{player_stats.8}}</td>
+                        </tr>
+                    </table>
             </div>
         </div>
         <div class="col-md-4 sidebar">
-            <h1 class="wwdli">Injury<br/>History</h1>
+            <h1 class="wwdli">Injury History</h1>
             <hr>
             {% for injury in injury_list %}
                 <p>{{ injury.last_injury.date }}: <a href="/wwdli/{{ injury.id }}/">{{ injury.headline }}</a></p>

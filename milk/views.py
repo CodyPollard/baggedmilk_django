@@ -3,8 +3,8 @@ from django.forms import formset_factory
 from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from .forms import TimerForm, PasteComparisonForm, InjuryUpdateForm, PollQuestionForm, PollChoiceForm
-from .models import Timer, DucksInjury, DucksPlayer
-import re
+from .models import Timer, DucksInjury, IndividualPlayer, RegularSeasonGame, IndividualGame
+import re, pdb
 
 
 # Create your views here.
@@ -38,7 +38,7 @@ def wwdli_success(request):
     injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
     latest_injury = injury_list[0]
     # Get all currently injured players
-    injured_players = DucksPlayer.objects.filter(healthy=False).order_by('-salary')
+    injured_players = IndividualPlayer.objects.filter(healthy=False).order_by('-salary')
     # Get stats for display in template
     salary_hit = 0
     forward = ['lw', 'c', 'rw']
@@ -89,10 +89,13 @@ def wwdli_injury(request, injury_id):
 
 def wwdli(request):
     # Get all published injuries
-    injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
-    latest_injury = injury_list[0]
+    try:
+        injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+        latest_injury = injury_list[0]
+    except IndexError:
+        latest_injury = ['']
     # Get all currently injured players
-    injured_players = DucksPlayer.objects.filter(healthy=False).order_by('-salary')
+    injured_players = IndividualPlayer.objects.filter(healthy=False).order_by('-salary')
     # Get stats for display in template
     salary_hit = 0
     forward = ['lw', 'c', 'rw']
@@ -104,11 +107,11 @@ def wwdli(request):
         # Get total salary hit
         salary_hit += i.salary
         # Get positions
-        if i.position.lower().split(',')[0] in forward:
+        if i.pos.lower().split(',')[0] in forward:
             fwd += 1
-        elif i.position.lower().split(',')[0] in defense:
+        elif i.pos.lower().split(',')[0] in defense:
             de += 1
-        elif i.position.lower() == 'g':
+        elif i.pos.lower() == 'g':
             goalie += 1
         # Get ages
         if i.age <= 25:
@@ -138,18 +141,50 @@ def wwdli(request):
 
 
 def wwdli_roster_ducks(request):
-    ducks_roster = DucksPlayer.objects.all()
-    return render(request, 'milk/wwdli-roster-ducks.html', {'ducks_roster': ducks_roster})
+    all_players = IndividualPlayer.objects.all()
+    # all_games = IndividualGame.objects.all()
+    all_injuries = DucksInjury.objects.all()
+
+    players = []
+
+    for player in all_players:
+        inj_count = 0
+        for inj in all_injuries.filter(player=player):
+            inj_count += 1
+        players.append([player, inj_count])
+        # player_dict['inj_count'] = inj_count
+
+    # pdb.set_trace()
+
+    return render(request, 'milk/wwdli-roster-ducks.html', {'players': players})
 
 
 def wwdli_player(request, player_name):
-    player = DucksPlayer.objects.get(name=player_name)
+    player = IndividualPlayer.objects.get(name=player_name)
+    game_list = RegularSeasonGame.objects.filter(player=player)
     injury_list = DucksInjury.objects.filter(player=player)
+    # Stats
+    goals, assists, pm, pim, shots, shifts, toi, blocks, hits = 0, 0, 0, 0, 0, 0, 0, 0, 0
+    # Get season total stats
+    for game in game_list:
+        goals += game.goals
+        assists += game.assists
+        pm += game.pm
+        pim += game.pim
+        shots += game.shots
+        shifts += game.shifts
+        toi += game.toi
+        blocks += game.blocks
+        hits += game.hits
     # injury_list = DucksInjury.objects.filter(published=True).order_by('-last_injury')
+    avg_shifts = shifts/game_list.count()
+    avg_toi = toi/game_list.count()
+    player_stats = [goals, assists, pm, pim, shots, hits, blocks, avg_shifts, avg_toi]
     if player is None:
         return HttpResponseNotFound('<h1>Player not found. Check rosters for available players.</h1>')
     return render(request, 'milk/wwdli-player-breakdown.html', {'player': player,
-                                                                'injury_list': injury_list})
+                                                                'injury_list': injury_list,
+                                                                'player_stats': player_stats})
 
 
 def paste_results(request):

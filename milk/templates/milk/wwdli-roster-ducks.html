@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load humanize %}
+{% load roster_tags %}
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -33,6 +34,7 @@
         <div id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="/wwdli"><strong>WWDLI?</strong></a></li>
+            <li><a href="/wwdli/roster/ducks"><strong>Full Roster</strong></a></li>
           </ul>
         </div>
       </div>
@@ -48,12 +50,12 @@
                 <table class="wwdli-roster">
                     <tr>
                         <td><b>Player</b></td>
-                        <td><b>Total Injuries</b></td>
+                        <td><b># of Injuries</b></td>
                     </tr>
-                    {% for player in ducks_roster %}
+                    {% for player in players %}
                         <tr>
-                            <td><a href="/wwdli/roster/ducks/{{ player.name }}/">{{player.name}}</a></td>
-                            <td>Amount of Injuries here</td>
+                            <td><a href="/wwdli/roster/ducks/{{player.0.name}}/">{{player.0.name|format_name}}</a></td>
+                            <td>{{player.1}}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -65,7 +67,7 @@
 	<script src="{% static 'js/main.js' %}" type="text/javascript"></script>
 	<script>window.onload=timerTest;</script>
   <!-- Footer -->
-    <footer class="footer">
+    <footer class="navbar-fixed-bottom">
     <hr>
       <div class="container text-center">
         <p class="text-muted">Copyright &copy; {% now "Y" %} gpdigital.dev<br>
